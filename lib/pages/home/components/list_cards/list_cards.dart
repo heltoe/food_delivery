@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home/components/list_cards/card_food.dart';
+import 'package:food_delivery/pages/home/components/list_cards/card_food.dart';
 
 class ListCards extends StatelessWidget {
   const ListCards({

@@ -3,6 +3,7 @@ import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/base_text.dart';
 import 'package:food_delivery/widgets/block_with_icon.dart';
+import 'package:food_delivery/widgets/food_main_info.dart';
 import 'package:food_delivery/widgets/small_text.dart';
 import 'package:food_delivery/widgets/stars.dart';
 
@@ -44,44 +45,10 @@ class WhiteDescriptionSlide extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: 15, vertical: Dimensions.height10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BaseText(text: "Bitter Orange Marinade"),
-              SizedBox(height: Dimensions.height10),
-              Row(
-                children: const [
-                  Stars(filledStars: 5),
-                  SizedBox(width: 10),
-                  SmallText(text: "4.5"),
-                  SizedBox(width: 10),
-                  SmallText(text: "1287 comments"),
-                ],
-              ),
-              SizedBox(height: Dimensions.height20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  BlockWithIcon(
-                    text: "Normal",
-                    icon: Icons.circle_sharp,
-                    iconColor: AppColors.iconColor1,
-                  ),
-                  BlockWithIcon(
-                    text: "1.7km",
-                    icon: Icons.location_on,
-                    iconColor: AppColors.mainColor,
-                  ),
-                  BlockWithIcon(
-                    text: "32min",
-                    icon: Icons.access_time_rounded,
-                    iconColor: AppColors.iconColor2,
-                  ),
-                ],
-              )
-            ],
+            horizontal: Dimensions.width15,
+            vertical: Dimensions.height10,
           ),
+          child: FoodMainInfo(title: "Chinese Side"),
         ),
       ),
     );

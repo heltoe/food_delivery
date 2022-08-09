@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home/components/list_cards/list_cards.dart';
-import 'package:food_delivery/home/components/list_cards/list_cards_title.dart';
-import 'package:food_delivery/home/components/main_food_slider/main_food_slider.dart';
+import 'package:food_delivery/pages/home/components/list_cards/list_cards.dart';
+import 'package:food_delivery/pages/home/components/list_cards/list_cards_title.dart';
+import 'package:food_delivery/pages/home/components/main_food_slider/main_food_slider.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/common_wrapper.dart';
 

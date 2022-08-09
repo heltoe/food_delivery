@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home/components/body_main_page.dart';
-import 'package:food_delivery/home/components/main_food_slider/main_food_slider.dart';
-import 'package:food_delivery/home/components/header.dart';
+import 'package:food_delivery/pages/home/components/body_main_page.dart';
+import 'package:food_delivery/pages/home/components/header.dart';
 import 'package:food_delivery/utils/dimensions.dart';
-import 'package:food_delivery/widgets/base_text.dart';
 import 'package:food_delivery/widgets/common_wrapper.dart';
-import 'package:food_delivery/widgets/small_text.dart';
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
