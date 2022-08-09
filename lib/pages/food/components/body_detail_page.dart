@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/widgets/exandable_text.dart';
+import 'package:food_delivery/widgets/expandable_text.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/base_text.dart';
 import 'package:food_delivery/widgets/common_wrapper.dart';
