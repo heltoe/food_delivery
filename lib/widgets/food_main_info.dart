@@ -13,11 +13,13 @@ class FoodMainInfo extends StatelessWidget {
     this.spaceSecondLine = 0,
     this.sizeTitle = 0,
     required this.title,
+    required this.stars,
   }) : super(key: key);
   final double spaceFirstLine;
   final double spaceSecondLine;
   final String title;
   final double sizeTitle;
+  final double stars;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,11 @@ class FoodMainInfo extends StatelessWidget {
         SizedBox(
             height: spaceFirstLine == 0 ? Dimensions.height10 : spaceFirstLine),
         Row(
-          children: const [
-            Stars(filledStars: 5),
-            SizedBox(width: 10),
-            SmallText(text: "4.5"),
-            SizedBox(width: 10),
+          children: [
+            Stars(filledStars: stars),
+            const SizedBox(width: 10),
+            SmallText(text: stars.toString()),
+            const SizedBox(width: 10),
             SmallText(text: "1287 comments"),
           ],
         ),

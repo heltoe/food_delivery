@@ -1,12 +1,17 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/models/popular/product_popular.dart';
 import 'package:food_delivery/pages/home/components/main_food_slider/image_slide.dart';
 import 'package:food_delivery/pages/home/components/main_food_slider/white_description_slide.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 
 class MainFoodSlider extends StatefulWidget {
-  const MainFoodSlider({Key? key}) : super(key: key);
+  const MainFoodSlider({
+    Key? key,
+    required this.productList,
+  }) : super(key: key);
+  final List<ProductPopular> productList;
 
   @override
   State<MainFoodSlider> createState() => _MainFoodSliderState();
@@ -34,7 +39,7 @@ class _MainFoodSliderState extends State<MainFoodSlider> {
     pageController.dispose();
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(ProductPopular card, int index) {
     Matrix4 matrix4 = Matrix4.identity();
     double currentScale = 0.0;
     if (index == _currentPage.floor() || index == _currentPage.floor() - 1) {
@@ -53,8 +58,12 @@ class _MainFoodSliderState extends State<MainFoodSlider> {
       transform: matrix4,
       child: Stack(
         children: [
-          ImageSlide(baseHeight: _baseHeight, index: index),
-          WhiteDescriptionSlide(),
+          ImageSlide(
+            baseHeight: _baseHeight,
+            image: card.img!,
+            index: index,
+          ),
+          WhiteDescriptionSlide(title: card.name!, stars: card.stars!.toDouble(),),
         ],
       ),
     );
@@ -68,14 +77,14 @@ class _MainFoodSliderState extends State<MainFoodSlider> {
           height: Dimensions.pageViewHeight,
           child: PageView.builder(
             controller: pageController,
-            itemCount: 5,
+            itemCount: widget.productList.length,
             itemBuilder: (_, index) {
-              return _buildPageItem(index);
+              return _buildPageItem(widget.productList[index], index);
             },
           ),
         ),
         DotsIndicator(
-          dotsCount: 5,
+          dotsCount: widget.productList.isEmpty ? 1 : widget.productList.length,
           position: _currentPage,
           decorator: DotsDecorator(
             activeColor: AppColors.mainColor,

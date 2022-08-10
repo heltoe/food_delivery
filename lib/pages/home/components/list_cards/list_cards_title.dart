@@ -13,7 +13,7 @@ class ListCardsTitle extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const BaseText(text: "Popular"),
+        const BaseText(text: "Recommended"),
         SizedBox(width: Dimensions.width10),
         Container(
           margin: const EdgeInsets.only(bottom: 3),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/utils/colors.dart';
+import 'package:food_delivery/models/recommended/product_recommended.dart';
+import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/dimensions.dart';
-import 'package:food_delivery/widgets/base_text.dart';
-import 'package:food_delivery/widgets/block_with_icon.dart';
 import 'package:food_delivery/widgets/food_main_info.dart';
-import 'package:food_delivery/widgets/small_text.dart';
 
 class CardFood extends StatelessWidget {
   const CardFood({
     Key? key,
+    required this.card,
   }) : super(key: key);
+  final ProductRecommended card;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class CardFood extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.height20),
             color: Colors.white38,
             image: DecorationImage(
-              image: AssetImage("assets/images/food1.png"),
+              image: NetworkImage(AppConstants.urlToImage(card.img!)),
               fit: BoxFit.cover,
             ),
           ),
@@ -42,7 +42,8 @@ class CardFood extends StatelessWidget {
               padding: EdgeInsets.all(Dimensions.width10),
               child: FoodMainInfo(
                 spaceSecondLine: Dimensions.height10,
-                title: "Chinese Side",
+                title: card.name!,
+                stars: card.stars!.toDouble(),
               ),
             ),
           ),

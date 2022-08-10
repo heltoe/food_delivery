@@ -6,7 +6,7 @@ class Stars extends StatelessWidget {
     Key? key,
     required this.filledStars,
   }) : super(key: key);
-  final int filledStars;
+  final double filledStars;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Stars extends StatelessWidget {
       children: List.generate(
         5,
         (index) => Icon(
-          Icons.star,
+          index < filledStars ? Icons.star_rate_rounded : Icons.star_border_rounded,
           color: AppColors.mainColor,
           size: 15,
         ),

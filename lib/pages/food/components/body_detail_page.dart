@@ -30,6 +30,7 @@ class BodyDetailPage extends StatelessWidget {
             widget: FoodMainInfo(
               title: "Chinese Side",
               sizeTitle: Dimensions.height26,
+              stars: 5.0,
             ),
           ),
           SizedBox(height: Dimensions.height30),

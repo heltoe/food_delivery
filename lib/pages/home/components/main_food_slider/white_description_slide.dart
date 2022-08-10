@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
-import 'package:food_delivery/widgets/base_text.dart';
-import 'package:food_delivery/widgets/block_with_icon.dart';
 import 'package:food_delivery/widgets/food_main_info.dart';
-import 'package:food_delivery/widgets/small_text.dart';
-import 'package:food_delivery/widgets/stars.dart';
 
 class WhiteDescriptionSlide extends StatelessWidget {
   const WhiteDescriptionSlide({
     Key? key,
+    required this.title,
+    required this.stars,
   }) : super(key: key);
+  final String title;
+  final double stars;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class WhiteDescriptionSlide extends StatelessWidget {
             horizontal: Dimensions.width15,
             vertical: Dimensions.height10,
           ),
-          child: FoodMainInfo(title: "Chinese Side"),
+          child: FoodMainInfo(title: title, stars: stars,),
         ),
       ),
     );
