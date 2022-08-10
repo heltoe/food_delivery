@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/pages/recommended-food/components/navigation/add_to_cart_button.dart';
+import 'package:food_delivery/widgets/add_to_cart_button.dart';
 import 'package:food_delivery/pages/recommended-food/components/navigation/wish_controller_button.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -7,7 +7,9 @@ import 'package:food_delivery/utils/dimensions.dart';
 class SecondLineController extends StatelessWidget {
   const SecondLineController({
     Key? key,
+    required this.price,
   }) : super(key: key);
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,8 @@ class SecondLineController extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          WishControllerButton(),
-          AddToCartButton()
-        ],
+        children: [WishControllerButton(), AddToCartButton(price: price)],
       ),
     );
   }
 }
-

@@ -1,32 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/models/recommended/product_recommended.dart';
 import 'package:food_delivery/pages/recommended-food/components/header.dart';
-import 'package:food_delivery/pages/recommended-food/components/hero_image.dart';
+import 'package:food_delivery/pages/recommended-food/components/hero_title.dart';
 import 'package:food_delivery/pages/recommended-food/components/navigation/bottom_navigation.dart';
+import 'package:food_delivery/routes/route_helper.dart';
+import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 class RecommendedFoodDetailPage extends StatelessWidget {
-  const RecommendedFoodDetailPage({Key? key}) : super(key: key);
+  const RecommendedFoodDetailPage({
+    Key? key,
+    required this.pageId,
+  }) : super(key: key);
+  final String pageId;
 
   @override
   Widget build(BuildContext context) {
+    var productList = Get.find<RecommendedProductController>()
+        .recommendedProductList
+        .where((element) => element.id.toString() == pageId);
+    ProductRecommended product;
+
+    if (productList.isNotEmpty) {
+      product = productList.first;
+    } else {
+      Get.toNamed(RouteHelper.getInitial());
+      return const Scaffold();
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Header(),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),
-              child: HeroImage()
+              child: HeroTitle(title: product.name!),
             ),
             pinned: true,
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/food1.png",
+              background: Image.network(
+                AppConstants.urlToImage(product.img!),
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -35,16 +56,13 @@ class RecommendedFoodDetailPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                  ExpandableText(
-                    text:
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                  ),
+                ExpandableText(text: product.description!),
               ],
             ),
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: BottomNavigation(price: product.price!),
     );
   }
 }

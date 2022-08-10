@@ -5,7 +5,11 @@ import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/base_text.dart';
 
 class FirstLineController extends StatelessWidget {
-  const FirstLineController({Key? key}) : super(key: key);
+  const FirstLineController({
+    Key? key,
+    required this.price,
+  }) : super(key: key);
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class FirstLineController extends StatelessWidget {
           ),
           SizedBox(width: Dimensions.width20),
           BaseText(
-            text: "\$12.88 X 0",
+            text: "\$ $price X 0",
             color: AppColors.mainBlackColor,
             size: Dimensions.height26,
           ),

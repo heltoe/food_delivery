@@ -1,10 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/popular/product_popular.dart';
+import 'package:food_delivery/pages/popular-food/popular_food_detail_page.dart';
 import 'package:food_delivery/pages/home/components/main_food_slider/image_slide.dart';
 import 'package:food_delivery/pages/home/components/main_food_slider/white_description_slide.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:get/get.dart';
 
 class MainFoodSlider extends StatefulWidget {
   const MainFoodSlider({
@@ -56,15 +59,23 @@ class _MainFoodSliderState extends State<MainFoodSlider> {
 
     return Transform(
       transform: matrix4,
-      child: Stack(
-        children: [
-          ImageSlide(
-            baseHeight: _baseHeight,
-            image: card.img!,
-            index: index,
-          ),
-          WhiteDescriptionSlide(title: card.name!, stars: card.stars!.toDouble(),),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(RouteHelper.getPopularFood(card.id!));
+        },
+        child: Stack(
+          children: [
+            ImageSlide(
+              baseHeight: _baseHeight,
+              image: card.img!,
+              index: index,
+            ),
+            WhiteDescriptionSlide(
+              title: card.name!,
+              stars: card.stars!.toDouble(),
+            ),
+          ],
+        ),
       ),
     );
   }

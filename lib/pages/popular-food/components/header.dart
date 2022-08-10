@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/utils/dimensions.dart';
+import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
+import 'package:get/get.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -12,7 +14,12 @@ class Header extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppIcon(icon: Icons.arrow_back_ios),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(RouteHelper.initial);
+          },
+          child: const AppIcon(icon: Icons.arrow_back_ios),
+        ),
         AppIcon(icon: Icons.shopping_cart_outlined),
       ],
     );
