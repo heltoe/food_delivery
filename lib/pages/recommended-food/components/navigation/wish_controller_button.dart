@@ -12,6 +12,7 @@ class WishControllerButton extends StatelessWidget {
     return BaseNavigationButton(
       widget: Icon(Icons.favorite, color: AppColors.mainColor),
       backgroundColor: Colors.white,
+      clickHandler: () {},
     );
   }
 }

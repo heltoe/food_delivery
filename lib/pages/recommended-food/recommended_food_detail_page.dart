@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/helper/counter_operation.dart';
 import 'package:food_delivery/models/recommended/product_recommended.dart';
 import 'package:food_delivery/pages/recommended-food/components/header.dart';
 import 'package:food_delivery/pages/recommended-food/components/hero_title.dart';
@@ -19,13 +21,19 @@ class RecommendedFoodDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productList = Get.find<RecommendedProductController>()
+    // init instance controller
+    RecommendedProductController recommendedProductController =
+        Get.find<RecommendedProductController>();
+    CartController cartController = Get.find<CartController>();
+    //
+    ProductRecommended product;
+    Iterable<ProductRecommended> productList = recommendedProductController
         .recommendedProductList
         .where((element) => element.id.toString() == pageId);
-    ProductRecommended product;
 
     if (productList.isNotEmpty) {
       product = productList.first;
+      recommendedProductController.initProduct(product, cartController);
     } else {
       Get.toNamed(RouteHelper.getInitial());
       return const Scaffold();
@@ -37,9 +45,11 @@ class RecommendedFoodDetailPage extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             toolbarHeight: 70,
-            title: Header(),
+            title: GetBuilder<RecommendedProductController>(builder: (controller) {
+              return Header(countInCart: controller.inCartItems);
+            }),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
+              preferredSize: const Size.fromHeight(20),
               child: HeroTitle(title: product.name!),
             ),
             pinned: true,
@@ -62,7 +72,23 @@ class RecommendedFoodDetailPage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigation(price: product.price!),
+      bottomNavigationBar: GetBuilder<RecommendedProductController>(
+        builder: (controller) {
+          void changeCountMethod(CounterOperation type) {
+            controller.setQuantity(
+                isIncrement: CounterOperationHelper.isIncrement(type));
+          }
+
+          return BottomNavigation(
+            price: product.price!,
+            count: controller.quantity,
+            changeCountMethod: changeCountMethod,
+            addToCartHandler: () {
+              controller.cartHandler(product);
+            },
+          );
+        },
+      ),
     );
   }
 }

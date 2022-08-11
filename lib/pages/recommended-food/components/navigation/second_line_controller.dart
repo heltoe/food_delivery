@@ -8,8 +8,12 @@ class SecondLineController extends StatelessWidget {
   const SecondLineController({
     Key? key,
     required this.price,
+    required this.count,
+    required this.clickHandler,
   }) : super(key: key);
   final int price;
+  final int count;
+  final void Function() clickHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,14 @@ class SecondLineController extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [WishControllerButton(), AddToCartButton(price: price)],
+        children: [
+          WishControllerButton(),
+          AddToCartButton(
+            price: price,
+            count: count,
+            clickHandler: clickHandler,
+          ),
+        ],
       ),
     );
   }

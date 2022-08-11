@@ -18,9 +18,9 @@ class _MainFoodPageState extends State<MainFoodPage> {
       body: Column(
         children: [
           SizedBox(height: Dimensions.height45),
-          CommonWrapper(widget: Header()),
+          const CommonWrapper(widget: Header()),
           SizedBox(height: Dimensions.height15),
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
               child: BodyMainPage(),
             ),
