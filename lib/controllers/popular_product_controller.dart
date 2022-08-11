@@ -46,19 +46,15 @@ class PopularProductController extends GetxController {
     _initProductQuantity(productPopular);
   }
 
-  void setQuantity({required bool isIncrement}) {
-    if (isIncrement) {
-      if (_quantity + 1 > _maxCount) {
-        _callSnackBar("You cant reduce more!");
-        return;
-      }
-      _quantity++;
-    } else {
-      if (_quantity - 1 < 0) {
-        return;
-      }
-      _quantity--;
+  void setQuantity(int count) {
+    if (count > _maxCount) {
+      _callSnackBar("You cant reduce more!");
+      return;
     }
+    if (count < 0) {
+      return;
+    }
+    _quantity = count;
     update();
   }
 

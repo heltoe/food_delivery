@@ -74,9 +74,8 @@ class RecommendedFoodDetailPage extends StatelessWidget {
       ),
       bottomNavigationBar: GetBuilder<RecommendedProductController>(
         builder: (controller) {
-          void changeCountMethod(CounterOperation type) {
-            controller.setQuantity(
-                isIncrement: CounterOperationHelper.isIncrement(type));
+          void changeCountMethod(int count) {
+            controller.setQuantity(count);
           }
 
           return BottomNavigation(

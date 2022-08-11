@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/to_cart_btn.dart';
@@ -23,7 +22,12 @@ class Header extends StatelessWidget {
             Get.toNamed(RouteHelper.initial);
           },
         ),
-        ToCartBtn(countInCart: countInCart),
+        ToCartBtn(
+          countInCart: countInCart,
+          clickHandler: () {
+            Get.toNamed(RouteHelper.cart);
+          },
+        ),
       ],
     );
   }

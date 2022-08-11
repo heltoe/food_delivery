@@ -65,9 +65,8 @@ class PopularFoodDetailPage extends StatelessWidget {
       ),
       bottomNavigationBar: GetBuilder<PopularProductController>(
         builder: (controller) {
-          void changeCountMethod(CounterOperation type) {
-            controller.setQuantity(
-                isIncrement: CounterOperationHelper.isIncrement(type));
+          void changeCountMethod(int count) {
+            controller.setQuantity(count);
           }
 
           return BottomNavigation(

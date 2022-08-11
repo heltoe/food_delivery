@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/pages/popular-food/components/navigation/counter_controller_button.dart';
-import 'package:food_delivery/helper/counter_operation.dart';
+import 'package:food_delivery/widgets/counter_controller/counter_controller_button.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/add_to_cart_button.dart';
@@ -15,11 +14,11 @@ class BottomNavigation extends StatelessWidget {
   }) : super(key: key);
   final int price;
   final int count;
-  final void Function(CounterOperation type) changeCountMethod;
+  final void Function(int count) changeCountMethod;
   final void Function() addToCartHandler;
 
-  void clickHandler(CounterOperation type) {
-    changeCountMethod(type);
+  void clickHandler(int count) {
+    changeCountMethod(count);
   }
 
   @override

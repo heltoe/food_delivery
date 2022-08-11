@@ -22,7 +22,12 @@ class Header extends StatelessWidget {
             Get.toNamed(RouteHelper.initial);
           },
         ),
-        ToCartBtn(countInCart: countInCart),
+        ToCartBtn(
+          countInCart: countInCart,
+          clickHandler: () {
+            Get.toNamed(RouteHelper.cart);
+          },
+        ),
       ],
     );
   }

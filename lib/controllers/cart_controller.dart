@@ -11,6 +11,18 @@ class CartController extends GetxController {
 
   Map<int, CartItem> get items => _items;
 
+  List<CartItem> get getListCartItems =>
+      _items.entries.map((e) => e.value).toList();
+
+  int get totalPriceItems {
+    int totalPrice = 0;
+    _items.forEach((key, value) {
+      int totalPriceProduct = value.price! * value.quantity!;
+      totalPrice += totalPriceProduct;
+    });
+    return totalPrice;
+  }
+
   bool _baseCondition(CartItem product) {
     return _items.containsKey((product.id!));
   }
@@ -25,11 +37,10 @@ class CartController extends GetxController {
     } else {
       _changeCardItem(product);
     }
-    print(_items);
     update();
   }
 
-  void _changeCardItem (CartItem product) {
+  void _changeCardItem(CartItem product) {
     if (_baseCondition(product)) {
       if (_items[product.id]?.quantity != product.quantity) {
         _items.update(product.id!, (value) => product);
