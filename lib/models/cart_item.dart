@@ -6,6 +6,7 @@ class CartItem {
   int? quantity;
   bool? isExist;
   String? time;
+  bool? isPopular;
 
   CartItem({
     this.id,
@@ -15,6 +16,7 @@ class CartItem {
     this.quantity,
     this.isExist,
     this.time,
+    this.isPopular,
   });
 
   CartItem.fromJson(Map<String, dynamic> json) {
@@ -25,5 +27,6 @@ class CartItem {
     quantity = json['quantity'];
     isExist = json['isExist'];
     time = json['time'];
+    isPopular = json['isPopular'];
   }
 }

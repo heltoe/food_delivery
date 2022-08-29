@@ -8,8 +8,10 @@ class Header extends StatelessWidget {
   const Header({
     Key? key,
     required this.countInCart,
+    required this.idFood,
   }) : super(key: key);
   final int countInCart;
+  final int idFood;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +21,13 @@ class Header extends StatelessWidget {
         AppIcon(
           icon: Icons.clear,
           clickHandler: () {
-            Get.toNamed(RouteHelper.initial);
+            Get.toNamed(RouteHelper.getInitial());
           },
         ),
         ToCartBtn(
           countInCart: countInCart,
           clickHandler: () {
-            Get.toNamed(RouteHelper.cart);
+            Get.toNamed(RouteHelper.getCart(idFood));
           },
         ),
       ],

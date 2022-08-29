@@ -58,9 +58,16 @@ class _PlusMinusControllerState extends State<PlusMinusController> {
           },
           child: const Icon(Icons.remove, color: AppColors.signColor),
         ),
-        SizedBox(width: Dimensions.width10),
-        BaseText(text: localCounter.toString()),
-        SizedBox(width: Dimensions.width10),
+        GestureDetector(
+          onTap: () {},
+          child: Row(
+            children: [
+              SizedBox(width: Dimensions.width10),
+              BaseText(text: localCounter.toString()),
+              SizedBox(width: Dimensions.width10),
+            ],
+          ),
+        ),
         GestureDetector(
           onTap: () {
             clickHandler(CounterOperation.add);

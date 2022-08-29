@@ -22,9 +22,12 @@ class ToCartBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    clickBtn() {
+      if (clickHandler != null && countInCart > 0) clickHandler!();
+    }
     return GestureDetector(
       onTap: () {
-        if (clickHandler != null) clickHandler!();
+        clickBtn();
       },
       child: Stack(
         children: [
@@ -34,6 +37,9 @@ class ToCartBtn extends StatelessWidget {
             size: size,
             iconSize: iconSize,
             backgroundColor: backgroundColor,
+            clickHandler: () {
+              clickBtn();
+            },
           ),
           countInCart > 0
               ? Positioned(

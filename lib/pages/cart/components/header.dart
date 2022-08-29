@@ -10,7 +10,9 @@ import 'package:get/get.dart';
 class Header extends StatelessWidget {
   const Header({
     Key? key,
+    required this.backPage,
   }) : super(key: key);
+  final void Function() backPage;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class Header extends StatelessWidget {
             backgroundColor: AppColors.mainColor,
             iconSize: Dimensions.height24,
             clickHandler: () {
-              Get.toNamed(RouteHelper.initial);
+              backPage();
             },
           ),
           SizedBox(width: Dimensions.width20 * 9),
@@ -34,7 +36,7 @@ class Header extends StatelessWidget {
             backgroundColor: AppColors.mainColor,
             iconSize: Dimensions.height24,
             clickHandler: () {
-              Get.toNamed(RouteHelper.initial);
+              Get.toNamed(RouteHelper.getInitial());
             },
           ),
           ToCartBtn(

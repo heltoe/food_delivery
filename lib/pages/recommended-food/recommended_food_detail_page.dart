@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
-import 'package:food_delivery/helper/counter_operation.dart';
 import 'package:food_delivery/models/recommended/product_recommended.dart';
 import 'package:food_delivery/pages/recommended-food/components/header.dart';
 import 'package:food_delivery/pages/recommended-food/components/hero_title.dart';
-import 'package:food_delivery/pages/recommended-food/components/navigation/bottom_navigation.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
+import 'package:food_delivery/widgets/add_to_cart_button.dart';
+import 'package:food_delivery/widgets/base_container_navigation.dart';
+import 'package:food_delivery/widgets/counter_controller/counter_controller_button.dart';
 import 'package:food_delivery/widgets/expandable_text.dart';
 import 'package:get/get.dart';
 
@@ -45,8 +46,12 @@ class RecommendedFoodDetailPage extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             toolbarHeight: 70,
-            title: GetBuilder<RecommendedProductController>(builder: (controller) {
-              return Header(countInCart: controller.inCartItems);
+            title:
+                GetBuilder<RecommendedProductController>(builder: (controller) {
+              return Header(
+                countInCart: controller.inCartItems,
+                idFood: product.id!,
+              );
             }),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(20),
@@ -78,13 +83,20 @@ class RecommendedFoodDetailPage extends StatelessWidget {
             controller.setQuantity(count);
           }
 
-          return BottomNavigation(
-            price: product.price!,
-            count: controller.quantity,
-            changeCountMethod: changeCountMethod,
-            addToCartHandler: () {
-              controller.cartHandler(product);
-            },
+          return BaseContainerNavigation(
+            widgets: [
+              CounterControllerButton(
+                clickHandler: changeCountMethod,
+                count: controller.quantity,
+              ),
+              AddToCartButton(
+                price: product.price!,
+                count: controller.quantity,
+                clickHandler: () {
+                  controller.cartHandler(product);
+                },
+              ),
+            ],
           );
         },
       ),

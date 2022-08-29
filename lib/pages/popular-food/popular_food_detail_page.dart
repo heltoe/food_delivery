@@ -3,12 +3,13 @@ import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/models/popular/product_popular.dart';
 import 'package:food_delivery/pages/popular-food/components/body_detail_page.dart';
-import 'package:food_delivery/pages/popular-food/components/navigation/bottom_navigation.dart';
 import 'package:food_delivery/pages/popular-food/components/header.dart';
 import 'package:food_delivery/pages/popular-food/components/hero_image.dart';
-import 'package:food_delivery/helper/counter_operation.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:food_delivery/widgets/add_to_cart_button.dart';
+import 'package:food_delivery/widgets/base_container_navigation.dart';
+import 'package:food_delivery/widgets/counter_controller/counter_controller_button.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetailPage extends StatelessWidget {
@@ -51,7 +52,10 @@ class PopularFoodDetailPage extends StatelessWidget {
             left: Dimensions.width20,
             right: Dimensions.width20,
             child: GetBuilder<PopularProductController>(builder: (controller) {
-              return Header(countInCart: controller.inCartItems);
+              return Header(
+                countInCart: controller.inCartItems,
+                idFood: product.id!,
+              );
             }),
           ),
           Positioned(
@@ -69,13 +73,20 @@ class PopularFoodDetailPage extends StatelessWidget {
             controller.setQuantity(count);
           }
 
-          return BottomNavigation(
-            changeCountMethod: changeCountMethod,
-            addToCartHandler: () {
-              controller.cartHandler(product);
-            },
-            price: product.price!,
-            count: controller.quantity,
+          return BaseContainerNavigation(
+            widgets: [
+              CounterControllerButton(
+                clickHandler: changeCountMethod,
+                count: controller.quantity,
+              ),
+              AddToCartButton(
+                price: product.price!,
+                count: controller.quantity,
+                clickHandler: () {
+                  controller.cartHandler(product);
+                },
+              ),
+            ],
           );
         },
       ),

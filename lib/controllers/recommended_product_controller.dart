@@ -88,6 +88,7 @@ class RecommendedProductController extends GetxController {
       quantity: _quantity,
       isExist: true,
       time: DateTime.now().toString(),
+      isPopular: false,
     );
     return cartItem;
   }

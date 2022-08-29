@@ -87,6 +87,7 @@ class PopularProductController extends GetxController {
       quantity: _quantity,
       isExist: true,
       time: DateTime.now().toString(),
+      isPopular: true,
     );
     return cartItem;
   }
