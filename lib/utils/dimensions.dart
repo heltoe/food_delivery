@@ -27,6 +27,7 @@ class Dimensions {
   static double width35 = screenWidthRounded / (screenWidthRounded / 35);
   static double width40 = screenWidthRounded / (screenWidthRounded / 40);
   static double width45 = screenWidthRounded / (screenWidthRounded / 45);
+  static double width250 = screenWidthRounded / (screenWidthRounded / 250);
 
   // main_food_page
   // dimensions for slider on main page
