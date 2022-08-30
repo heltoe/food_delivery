@@ -14,6 +14,16 @@ class CartController extends GetxController {
   List<CartItem> get getListCartItems =>
       _items.entries.map((e) => e.value).toList();
 
+  List<CartItem> _storageItems = [];
+  List<CartItem> getCartData() {
+    setCart = cartRepository.getCartList();
+    return _storageItems;
+  }
+  set setCart(List<CartItem> items) {
+    _storageItems = items;
+    _storageItems.forEach((element) => _items.putIfAbsent(element.id!, () => element));
+  }
+
   int get totalPriceItems {
     int totalPrice = 0;
     _items.forEach((key, value) {
@@ -37,6 +47,8 @@ class CartController extends GetxController {
     } else {
       _changeCardItem(product);
     }
+
+    cartRepository.addToCartList(getListCartItems);
     update();
   }
 

@@ -29,4 +29,17 @@ class CartItem {
     time = json['time'];
     isPopular = json['isPopular'];
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "name": name,
+      "price": price,
+      "img": img,
+      "quantity": quantity,
+      "isExist": isExist,
+      "time": time,
+      "isPopular": isPopular,
+    };
+  }
 }

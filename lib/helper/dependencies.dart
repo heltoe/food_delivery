@@ -7,14 +7,17 @@ import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/data/repository/recommended_product_controller.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> init() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.lazyPut(() => sharedPreferences);
   // api client
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.baseUrl));
   // repositories
   Get.lazyPut(() => PopularProductRepository(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepository(apiClient: Get.find()));
-  Get.lazyPut(() => CartRepository());
+  Get.lazyPut(() => CartRepository(sharedPreferences: Get.find()));
   // controllers
   Get.lazyPut(() => PopularProductController(popularProductRepository: Get.find()));
   Get.lazyPut(() => RecommendedProductController(recommendedProductRepository: Get.find()));
