@@ -9,6 +9,7 @@ import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/base_container_navigation.dart';
 import 'package:food_delivery/widgets/base_navigation_button.dart';
 import 'package:food_delivery/widgets/base_text.dart';
+import 'package:food_delivery/widgets/empty_state.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
@@ -51,7 +52,7 @@ class CartPage extends StatelessWidget {
             child: Container(
               child: GetBuilder<CartController>(
                 builder: (controller) {
-                  return ListCards(
+                  return controller.getListCartItems.isNotEmpty ? ListCards(
                     list: controller.getListCartItems,
                     listListenerCardClick: (int index) {
                       toCardFood(controller.getListCartItems[index]);
@@ -67,7 +68,7 @@ class CartPage extends StatelessWidget {
                         Get.toNamed(RouteHelper.getInitial());
                       }
                     },
-                  );
+                  ) : const EmptyState(title: "Your cart is empty");
                 },
               ),
             ),
@@ -76,8 +77,10 @@ class CartPage extends StatelessWidget {
       ),
       bottomNavigationBar: GetBuilder<CartController>(
         builder: (controller) {
-          void changeCountMethod() {}
-
+          void changeCountMethod() {
+            controller.addToHistoryList();
+            Get.toNamed(RouteHelper.getInitial());
+          }
           return BaseContainerNavigation(
             widgets: [
               BaseNavigationButton(

@@ -9,6 +9,7 @@ class Dimensions {
   static double screenWidth = Get.context!.width;
   static double screenWidthRounded = screenWidth.floor().toDouble();
   // dynamic height
+  static double height5 = screenHeightRounded / (screenHeightRounded / 5);
   static double height10 = screenHeightRounded / (screenHeightRounded / 10);
   static double height15 = screenHeightRounded / (screenHeightRounded / 15);
   static double height16 = screenHeightRounded / (screenHeightRounded / 16);
@@ -19,7 +20,12 @@ class Dimensions {
   static double height35 = screenHeightRounded / (screenHeightRounded / 35);
   static double height40 = screenHeightRounded / (screenHeightRounded / 40);
   static double height45 = screenHeightRounded / (screenHeightRounded / 45);
+  static double height50 = screenHeightRounded / (screenHeightRounded / 50);
+  static double height75 = screenHeightRounded / (screenHeightRounded / 75);
+  static double height80 = screenHeightRounded / (screenHeightRounded / 80);
+  static double height150 = screenHeightRounded / (screenHeightRounded / 150);
   // dynamic width
+  static double width5 = screenWidthRounded / (screenWidthRounded / 5);
   static double width10 = screenWidthRounded / (screenWidthRounded / 10);
   static double width15 = screenWidthRounded / (screenWidthRounded / 15);
   static double width20 = screenWidthRounded / (screenWidthRounded / 20);
@@ -28,6 +34,7 @@ class Dimensions {
   static double width40 = screenWidthRounded / (screenWidthRounded / 40);
   static double width45 = screenWidthRounded / (screenWidthRounded / 45);
   static double width250 = screenWidthRounded / (screenWidthRounded / 250);
+  static double width350 = screenWidthRounded / (screenWidthRounded / 350);
 
   // main_food_page
   // dimensions for slider on main page

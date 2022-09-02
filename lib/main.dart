@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/pages/auth/sign_up_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         return  GetMaterialApp(
           title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
-          initialRoute: RouteHelper.getSplash(),
+          // home: SignUpPage(),
+          initialRoute: RouteHelper.getLogin(),
           getPages: RouteHelper.routes,
         );
       });

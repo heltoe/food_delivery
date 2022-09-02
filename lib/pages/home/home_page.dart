@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/auth/sign_up_page.dart';
+import 'package:food_delivery/pages/cart-history/cart_history_page.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
-import 'package:food_delivery/utils/colors.dart';
+import 'package:food_delivery/pages/profile/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MenuItem {
@@ -23,15 +25,15 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       const MainFoodPage(),
-      Container(child: Center(child: Text("Next page"))),
-      Container(child: Center(child: Text("Next next page"))),
-      Container(child: Center(child: Text("Next next next page"))),
+      const SignUpPage(),
+      const CartHistory(),
+      const ProfilePage(),
     ];
   }
 
   final List<MenuItem> _menuItems = [
     MenuItem(icon: CupertinoIcons.home, title: "Home"),
-    MenuItem(icon: CupertinoIcons.archivebox_fill, title: "History"),
+    MenuItem(icon: CupertinoIcons.home, title: "Sign"),
     MenuItem(icon: CupertinoIcons.cart_fill, title: "Cart"),
     MenuItem(icon: CupertinoIcons.person, title: "Me"),
   ];
@@ -53,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         String title = _menuItems[index].title;
         return PersistentBottomNavBarItem(
           icon: Icon(icon),
-          title: title,
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         );
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style1, // Choose the nav bar style with this property.
+      navBarStyle: NavBarStyle.style2, // Choose the nav bar style with this property.
     );
   }
 }

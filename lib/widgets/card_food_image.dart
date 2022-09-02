@@ -8,11 +8,17 @@ class CardFoodImage extends StatelessWidget {
     this.height = 0,
     this.width = 0,
     this.borderRadius = 0,
+    this.marginBottom = 0,
+    this.marginRight = 0,
+    this.marginTop = 0,
     required this.image,
   }) : super(key: key);
   final double width;
   final double height;
   final double borderRadius;
+  final double marginBottom;
+  final double marginRight;
+  final double marginTop;
   final String image;
 
   @override
@@ -20,9 +26,14 @@ class CardFoodImage extends StatelessWidget {
     return Container(
       width: width == 0 ? Dimensions.heightImageCard : width,
       height: height == 0 ? Dimensions.heightImageCard : height,
-      margin: EdgeInsets.only(bottom: Dimensions.height10),
+      margin: EdgeInsets.only(
+        bottom: marginBottom == 0 ? Dimensions.height10 : marginBottom,
+        right: marginRight,
+        top: marginTop,
+      ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius == 0 ? Dimensions.height20 : borderRadius),
+        borderRadius: BorderRadius.circular(
+            borderRadius == 0 ? Dimensions.height20 : borderRadius),
         color: Colors.white38,
         image: DecorationImage(
           image: NetworkImage(AppConstants.urlToImage(image)),

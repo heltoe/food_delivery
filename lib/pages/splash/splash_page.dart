@@ -37,6 +37,8 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.linear,
     );
 
+
+
     Timer(
       const Duration(seconds: 3),
           () => Get.offNamed(RouteHelper.getInitial()),

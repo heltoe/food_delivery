@@ -8,25 +8,58 @@ class CartRepository {
 
   CartRepository({required this.sharedPreferences});
 
-  List<String> cart = [];
+  List<String> _cart = [];
+  List<String> _cartHistory = [];
 
   void addToCartList(List<CartItem> cartList) {
-    cart = [];
-    cartList.forEach((element) => cart.add(jsonEncode(element)));
+    sharedPreferences.remove(AppConstants.nameCartListInSharedPreference);
+    _cart = [];
+    cartList.forEach((element) => _cart.add(jsonEncode(element)));
     sharedPreferences.setStringList(
-        AppConstants.nameCartListInSharedPreference, cart);
+        AppConstants.nameCartListInSharedPreference, _cart);
+  }
+
+  void addToHistoryList() {
+    if (sharedPreferences
+        .containsKey(AppConstants.nameCartHistoryListInSharedPreference)) {
+      _cartHistory = sharedPreferences
+          .getStringList(AppConstants.nameCartHistoryListInSharedPreference)!;
+    }
+    DateTime time = DateTime.now();
+    _cart.forEach((element) {
+      // update time order
+      var parsedElement = CartItem.fromJson(jsonDecode(element));
+      parsedElement.time = time.toString();
+      _cartHistory.add(jsonEncode(parsedElement));
+    });
+    removeCart();
+    sharedPreferences.setStringList(
+        AppConstants.nameCartHistoryListInSharedPreference, _cartHistory);
+  }
+
+  void removeCart() {
+    _cart = [];
+    sharedPreferences.remove(AppConstants.nameCartListInSharedPreference);
   }
 
   List<CartItem> getCartList() {
+    return _getCommonCartItemList(AppConstants.nameCartListInSharedPreference);
+  }
+
+  List<CartItem> getCartHistoryList() {
+    return _getCommonCartItemList(
+        AppConstants.nameCartHistoryListInSharedPreference);
+  }
+
+  List<CartItem> _getCommonCartItemList(String nameEssence) {
     List<String> cartListString = [];
-    if (sharedPreferences
-        .containsKey(AppConstants.nameCartListInSharedPreference)) {
-      cartListString = sharedPreferences
-          .getStringList(AppConstants.nameCartListInSharedPreference)!;
+    if (sharedPreferences.containsKey(nameEssence)) {
+      cartListString = sharedPreferences.getStringList(nameEssence)!;
     }
     List<CartItem> cartList = [];
 
-    cartListString.forEach((element) => cartList.add(CartItem.fromJson(jsonDecode(element))));
+    cartListString.forEach(
+        (element) => cartList.add(CartItem.fromJson(jsonDecode(element))));
     return cartList;
   }
 }

@@ -19,6 +19,11 @@ class CartController extends GetxController {
     setCart = cartRepository.getCartList();
     return _storageItems;
   }
+
+  List<CartItem> getCartHistoryData() {
+    return cartRepository.getCartHistoryList();
+  }
+
   set setCart(List<CartItem> items) {
     _storageItems = items;
     _storageItems.forEach((element) => _items.putIfAbsent(element.id!, () => element));
@@ -39,6 +44,11 @@ class CartController extends GetxController {
 
   bool isExistInCart(CartItem product) {
     return _baseCondition(product);
+  }
+
+  void addToHistoryList() {
+    cartRepository.addToHistoryList();
+    _clearCart();
   }
 
   void changeQuantity(CartItem product) {
@@ -66,7 +76,7 @@ class CartController extends GetxController {
     if (_baseCondition(product)) _items.remove(product.id);
   }
 
-  void clearCart() {
+  void _clearCart() {
     _items = {};
     update();
   }
