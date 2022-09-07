@@ -80,4 +80,11 @@ class CartController extends GetxController {
     _items = {};
     update();
   }
+
+  void clearCartAndCartHistoryByLogout() {
+    _clearCart();
+    _storageItems = [];
+    cartRepository.clearCartAndCartHistoryByLogout();
+    update();
+  }
 }

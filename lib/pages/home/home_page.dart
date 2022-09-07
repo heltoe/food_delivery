@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery/pages/auth/sign_up_page.dart';
 import 'package:food_delivery/pages/cart-history/cart_history_page.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/pages/profile/profile_page.dart';
@@ -25,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       const MainFoodPage(),
-      const SignUpPage(),
       const CartHistory(),
       const ProfilePage(),
     ];
@@ -33,7 +31,6 @@ class _HomePageState extends State<HomePage> {
 
   final List<MenuItem> _menuItems = [
     MenuItem(icon: CupertinoIcons.home, title: "Home"),
-    MenuItem(icon: CupertinoIcons.home, title: "Sign"),
     MenuItem(icon: CupertinoIcons.cart_fill, title: "Cart"),
     MenuItem(icon: CupertinoIcons.person, title: "Me"),
   ];

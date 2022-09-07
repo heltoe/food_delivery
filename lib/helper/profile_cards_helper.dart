@@ -3,6 +3,7 @@ enum ProfileCardType {
   phone,
   email,
   home,
+  logout,
 }
 
 class ProfileCardTypeHelper {
@@ -16,6 +17,8 @@ class ProfileCardTypeHelper {
         return "email";
       case ProfileCardType.home:
         return "home";
+      case ProfileCardType.logout:
+        return "logout";
       default:
         return "";
     }

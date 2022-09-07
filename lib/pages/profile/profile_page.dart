@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/cart_controller.dart';
+import 'package:food_delivery/controllers/profile_controller.dart';
 import 'package:food_delivery/helper/profile_cards_helper.dart';
+import 'package:food_delivery/models/profile_data.dart';
 import 'package:food_delivery/pages/profile/account_block.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/base_text.dart';
 import 'package:food_delivery/widgets/common_wrapper.dart';
+import 'package:get/get.dart';
 
 class ProfileCardInfo {
   String title;
@@ -26,21 +31,27 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileController profileController = Get.find<ProfileController>();
+    CartController cartController = Get.find<CartController>();
+    ProfileData profileData = profileController.profileData;
+    String getPlacedText (String profileValue, String placeholder) {
+      return profileValue.isEmpty ? placeholder : profileValue;
+    }
     List<ProfileCardInfo> listCardInfo = [
       ProfileCardInfo(
-        title: "Fill your name",
+        title: getPlacedText(profileData.name, "Fill your name"),
         icon: Icons.person,
         type: ProfileCardType.name,
         backgroundColor: AppColors.mainColor,
       ),
       ProfileCardInfo(
-        title: "Fill your number phone",
+        title: getPlacedText(profileData.phone, "Fill your number phone"),
         icon: Icons.phone,
         type: ProfileCardType.phone,
         backgroundColor: AppColors.yellowColor,
       ),
       ProfileCardInfo(
-        title: "Fill your email",
+        title: getPlacedText(profileData.email, "Fill your email"),
         icon: Icons.email,
         type: ProfileCardType.email,
         backgroundColor: AppColors.yellowColor,
@@ -51,7 +62,25 @@ class ProfilePage extends StatelessWidget {
         type: ProfileCardType.home,
         backgroundColor: AppColors.yellowColor,
       ),
+      ProfileCardInfo(
+        title: "Logout",
+        icon: Icons.logout,
+        type: ProfileCardType.logout,
+        backgroundColor: Colors.redAccent,
+      ),
     ];
+
+    void tappedCard(ProfileCardType type) {
+      switch(type) {
+        case ProfileCardType.logout:
+          cartController.clearCartAndCartHistoryByLogout();
+          profileController.logout();
+          Get.toNamed(RouteHelper.getLogin());
+          break;
+        default:
+          print(type);
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
@@ -80,11 +109,16 @@ class ProfilePage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: listCardInfo.length,
                 itemBuilder: (_, index) {
-                  return CommonWrapper(
-                    widget: AccountBlock(
-                      title: listCardInfo[index].title,
-                      backgroundColor: listCardInfo[index].backgroundColor,
-                      icon: listCardInfo[index].icon,
+                  return GestureDetector(
+                    onTap: () {
+                      tappedCard(listCardInfo[index].type);
+                    },
+                    child: CommonWrapper(
+                      widget: AccountBlock(
+                        title: listCardInfo[index].title,
+                        backgroundColor: listCardInfo[index].backgroundColor,
+                        icon: listCardInfo[index].icon,
+                      ),
                     ),
                   );
                 },

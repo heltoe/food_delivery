@@ -8,10 +8,12 @@ class BaseInput extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.icon,
+    this.isPassword = false,
   }) : super(key: key);
   final String hintText;
   final IconData icon;
   final TextEditingController controller;
+  final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class BaseInput extends StatelessWidget {
         borderRadius: BorderRadius.circular(Dimensions.width30),
       ),
       child: TextField(
+        obscureText: isPassword,
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,

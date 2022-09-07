@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/auth_controller.dart';
+import 'package:food_delivery/controllers/profile_controller.dart';
+import 'package:food_delivery/models/profile_data.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
@@ -30,18 +33,19 @@ class _SplashScreenState extends State<SplashScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
-    )
-      ..forward();
+    )..forward();
     animation = CurvedAnimation(
       parent: animationController,
       curve: Curves.linear,
     );
 
-
+    ProfileController authController = Get.find<ProfileController>();
 
     Timer(
       const Duration(seconds: 3),
-          () => Get.offNamed(RouteHelper.getInitial()),
+      () => authController.getToken().isEmpty
+          ? Get.offNamed(RouteHelper.getLogin())
+          : Get.offNamed(RouteHelper.getInitial()),
     );
   }
 

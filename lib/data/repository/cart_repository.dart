@@ -12,7 +12,6 @@ class CartRepository {
   List<String> _cartHistory = [];
 
   void addToCartList(List<CartItem> cartList) {
-    sharedPreferences.remove(AppConstants.nameCartListInSharedPreference);
     _cart = [];
     cartList.forEach((element) => _cart.add(jsonEncode(element)));
     sharedPreferences.setStringList(
@@ -28,7 +27,7 @@ class CartRepository {
     DateTime time = DateTime.now();
     _cart.forEach((element) {
       // update time order
-      var parsedElement = CartItem.fromJson(jsonDecode(element));
+      CartItem parsedElement = CartItem.fromJson(jsonDecode(element));
       parsedElement.time = time.toString();
       _cartHistory.add(jsonEncode(parsedElement));
     });
@@ -40,6 +39,16 @@ class CartRepository {
   void removeCart() {
     _cart = [];
     sharedPreferences.remove(AppConstants.nameCartListInSharedPreference);
+  }
+
+  void _removeCartHistory() {
+    _cartHistory = [];
+    sharedPreferences.remove(AppConstants.nameCartHistoryListInSharedPreference);
+  }
+
+  void clearCartAndCartHistoryByLogout() {
+    removeCart();
+    _removeCartHistory();
   }
 
   List<CartItem> getCartList() {

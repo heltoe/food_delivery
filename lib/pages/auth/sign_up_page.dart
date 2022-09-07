@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/models/sign_up_body.dart';
 import 'package:food_delivery/pages/auth/components/base_auth_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
@@ -41,13 +42,15 @@ class SignUpPage extends StatelessWidget {
       return isValid;
     }
 
-    bool sendForm() {
+    Future<bool> sendForm() async {
+      AuthController authController = Get.find<AuthController>();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       String name = nameController.text.trim();
       String phone = phoneController.text.trim();
       SignUpBody body = SignUpBody(email: email, password: password, name: name, phone: phone);
-      return true;
+      bool result = await authController.registration(body);
+      return result;
     }
 
     return BaseAuthPage(
@@ -71,6 +74,7 @@ class SignUpPage extends StatelessWidget {
               controller: passwordController,
               hintText: "Password",
               icon: Icons.password_sharp,
+              isPassword: true,
             ),
           ),
           SizedBox(height: Dimensions.height20),

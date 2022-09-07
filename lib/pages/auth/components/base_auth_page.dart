@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/pages/auth/components/auth_button.dart';
 import 'package:food_delivery/pages/auth/components/custom_snackbar.dart';
 import 'package:food_delivery/pages/auth/components/description.dart';
 import 'package:food_delivery/pages/auth/components/logo.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:get/get.dart';
 
 class BaseAuthPage extends StatelessWidget {
   const BaseAuthPage({
@@ -19,7 +22,7 @@ class BaseAuthPage extends StatelessWidget {
   }) : super(key: key);
 
   final bool Function() validate;
-  final bool Function() sendForm;
+  final Future<bool> Function() sendForm;
   final void Function() clickDescription;
   final Widget child;
   final String textBtn;
@@ -42,7 +45,7 @@ class BaseAuthPage extends StatelessWidget {
         if (!isSuccess) {
           showCustomSnackBar("Server error");
         } else {
-          print(111);
+          Get.toNamed(RouteHelper.getInitial());
         }
       } else {
         if (isCanShowMessage) {
