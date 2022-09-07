@@ -40,12 +40,12 @@ class ProfileController extends GetxController {
     update();
   }
 
-  getUserInfo() {
+  getUserInfo() async {
     DateTime currentTime = DateTime.now();
     DateTime lastTimeRequestedProfileModify = profileRepository.getLastTimeRequestedProfile();
     bool isAfter = currentTime.isAfter(lastTimeRequestedProfileModify);
     if (isAfter) {
-      fetchUserInfo();
+      await fetchUserInfo();
     } else {
       _setProfileData(profileRepository.getProfileData());
     }

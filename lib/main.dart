@@ -19,11 +19,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<ProfileController>().getUserInfo();
+    ProfileController profileController = Get.find<ProfileController>();
+    String token = profileController.getToken();
+    if (token.isNotEmpty) {
+      profileController.getUserInfo();
+    }
     Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
-        return  GetMaterialApp(
+        return GetMaterialApp(
           title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
           initialRoute: RouteHelper.getSplash(),

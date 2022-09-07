@@ -81,52 +81,55 @@ class ProfilePage extends StatelessWidget {
           print(type);
       }
     }
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.mainColor,
-        title: Center(
-          child: BaseText(
-            text: "Profile",
-            size: Dimensions.height24,
-            color: Colors.white,
+    // return GetBuilder<ProfileController>(builder: (controller) {
+      // controller.getUserInfo();
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.mainColor,
+          title: Center(
+            child: BaseText(
+              text: "Profile",
+              size: Dimensions.height24,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-      body: Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.only(top: Dimensions.height20),
-        child: Column(
-          children: [
-            AppIcon(
-              icon: Icons.person,
-              backgroundColor: AppColors.mainColor,
-              iconColor: Colors.white,
-              iconSize: Dimensions.height75,
-              size: Dimensions.height150,
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: ListView.builder(
-                itemCount: listCardInfo.length,
-                itemBuilder: (_, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      tappedCard(listCardInfo[index].type);
-                    },
-                    child: CommonWrapper(
-                      widget: AccountBlock(
-                        title: listCardInfo[index].title,
-                        backgroundColor: listCardInfo[index].backgroundColor,
-                        icon: listCardInfo[index].icon,
-                      ),
-                    ),
-                  );
-                },
+        body: Container(
+          width: double.maxFinite,
+          margin: EdgeInsets.only(top: Dimensions.height20),
+          child: Column(
+            children: [
+              AppIcon(
+                icon: Icons.person,
+                backgroundColor: AppColors.mainColor,
+                iconColor: Colors.white,
+                iconSize: Dimensions.height75,
+                size: Dimensions.height150,
               ),
-            )
-          ],
+              const SizedBox(height: 30),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: listCardInfo.length,
+                  itemBuilder: (_, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        tappedCard(listCardInfo[index].type);
+                      },
+                      child: CommonWrapper(
+                        widget: AccountBlock(
+                          title: listCardInfo[index].title,
+                          backgroundColor: listCardInfo[index].backgroundColor,
+                          icon: listCardInfo[index].icon,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    // });
   }
 }
